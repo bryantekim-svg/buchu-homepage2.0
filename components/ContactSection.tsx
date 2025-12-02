@@ -1,26 +1,12 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Clock } from 'lucide-react';
+import { MapPin, Phone, Clock, Send, CheckCircle2 } from 'lucide-react';
 
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
-    guardianName: '',
-    contact: '',
-    referralPath: '',
-    seniorName: '',
-    seniorDob: '',
-    seniorGender: 'female',
-    careGrade: '',
-    heightWeight: '',
-    religion: '',
-    currentLocation: '',
-    disease: '',
-    notes: '',
-    dietType: '일반식',
-    diaper: '미사용',
-    sleepState: '양호',
-    walkState: '가능',
-    cognitionState: '양호',
-    violenceState: '없음'
+    guardianName: '', contact: '', referralPath: '', seniorName: '', seniorDob: '',
+    seniorGender: 'female', careGrade: '', heightWeight: '', religion: '', currentLocation: '',
+    disease: '', notes: '', dietType: '일반식', diaper: '미사용', sleepState: '양호',
+    walkState: '가능', cognitionState: '양호', violenceState: '없음'
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -32,295 +18,191 @@ const ContactSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Save to localStorage for demo purposes
     const existingLeads = JSON.parse(localStorage.getItem('admin_leads') || '[]');
-    const newLead = {
-        ...formData,
-        id: Date.now(),
-        date: new Date().toLocaleString()
-    };
+    const newLead = { ...formData, id: Date.now(), date: new Date().toLocaleString() };
     localStorage.setItem('admin_leads', JSON.stringify([...existingLeads, newLead]));
-
-    // Conversion tracking
     const conversions = parseInt(localStorage.getItem('admin_conversions') || '0');
     localStorage.setItem('admin_conversions', (conversions + 1).toString());
-
     setSubmitted(true);
-    alert("상담 신청이 완료되었습니다. 담당자가 확인 후 빠르게 연락드리겠습니다.");
   };
 
   return (
-    <section id="contact" className="bg-stone-100 text-black py-24 border-t border-stone-200">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="contact" className="bg-stone-950 text-stone-200 py-32 border-t border-stone-900 relative">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         
-        {/* Review Section with Image */}
-        <div className="flex flex-col md:flex-row items-center gap-12 mb-20 bg-white p-8 md:p-12 rounded-2xl shadow-lg">
-            <div className="w-full md:w-1/3">
-                <div className="relative aspect-[3/4] bg-stone-100 rotate-[-2deg] shadow-md hover:rotate-0 transition-transform duration-500">
-                    <img 
-                        src="./letter.jpg" 
-                        alt="보호자 감사 편지" 
-                        className="w-full h-full object-cover p-2 bg-white"
-                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                    />
-                     <div className="absolute top-0 right-0 bg-emerald-600 text-white text-xs font-bold px-3 py-1">REAL REVIEW</div>
+        {/* Section Header */}
+        <div className="text-center mb-24 reveal">
+            <h2 className="text-emerald-500 font-bold tracking-[0.3em] uppercase text-sm mb-6">Reservation</h2>
+            <h3 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">입소 상담 및 대기 신청</h3>
+            <p className="text-stone-400 max-w-2xl mx-auto leading-relaxed">
+                부모님을 모시는 일은 인생에서 가장 중요한 결정 중 하나입니다.<br/>
+                가벼운 마음으로 문의주셔도 좋습니다. 전문가가 진심을 다해 안내해 드립니다.
+            </p>
+        </div>
+
+        {/* Map & Info Card - Premium Dark Design */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-stone-900 rounded-3xl overflow-hidden shadow-2xl mb-24 border border-stone-800 reveal">
+            <div className="lg:col-span-5 p-10 md:p-14 flex flex-col justify-center gap-10 bg-gradient-to-br from-stone-900 to-stone-950 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-900/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+                
+                <div>
+                    <div className="flex items-center gap-4 mb-3 text-emerald-400">
+                        <MapPin className="w-6 h-6" />
+                        <h4 className="font-bold text-lg tracking-widest uppercase">Location</h4>
+                    </div>
+                    <p className="text-xl text-white font-serif pl-10 leading-relaxed border-l-2 border-stone-800 ml-3">
+                        경기도 김포시 김포한강7로22번길 123<br/>
+                        <span className="text-stone-500 text-sm font-sans mt-2 block">(마산동, 부추꽃더클래식너싱홈)</span>
+                    </p>
+                </div>
+                <div>
+                    <div className="flex items-center gap-4 mb-3 text-emerald-400">
+                        <Phone className="w-6 h-6" />
+                        <h4 className="font-bold text-lg tracking-widest uppercase">Contact</h4>
+                    </div>
+                    <a href="tel:031-998-8369" className="text-3xl md:text-4xl text-white font-serif font-bold pl-10 block hover:text-emerald-400 transition-colors">
+                        031-998-8369
+                    </a>
+                </div>
+                <div>
+                    <div className="flex items-center gap-4 mb-3 text-emerald-400">
+                        <Clock className="w-6 h-6" />
+                        <h4 className="font-bold text-lg tracking-widest uppercase">Hours</h4>
+                    </div>
+                    <div className="pl-10 text-stone-400">
+                        <p className="mb-1"><span className="text-white w-20 inline-block">평일</span> 09:00 - 18:00</p>
+                        <p><span className="text-white w-20 inline-block">주말/공휴일</span> 사전 예약제</p>
+                    </div>
                 </div>
             </div>
-            <div className="w-full md:w-2/3 text-left">
-                <p className="text-emerald-600 font-bold tracking-widest text-sm mb-4 uppercase">From Family</p>
-                <blockquote className="text-2xl md:text-3xl font-serif mb-8 leading-relaxed text-stone-800 break-keep">
-                "긴 시간 가족 같은 마음으로 어머니를 보살펴 주셔서 진심으로 감사합니다. <br/>
-                <span className="text-emerald-800 font-bold bg-emerald-100 px-1">이 은혜 평생 잊지 못합니다.</span>"
-                </blockquote>
-                <div className="flex items-center gap-4">
-                    <div className="h-px w-12 bg-stone-300"></div>
-                    <p className="text-stone-500 text-sm font-medium">- 이OO 어르신 따님 드림 -</p>
+            <div className="lg:col-span-7 h-[400px] lg:h-auto bg-stone-800 relative group">
+                <iframe 
+                    title="부추꽃더클래식 위치"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.419472719277!2d126.6347!3d37.6441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDM4JzM4LjgiTiAxMjbCsDM4JzA0LjkiRQ!5e0!3m2!1sko!2skr!4v1600000000000!5m2!1sko!2skr"
+                    className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100"
+                    style={{border:0}} 
+                    allowFullScreen={true} 
+                    loading="lazy" 
+                ></iframe>
+                {/* Overlay text on map */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity duration-500">
+                    <span className="bg-black/70 text-white px-6 py-3 rounded-full text-sm font-bold backdrop-blur-sm border border-white/10">지도 크게 보기</span>
                 </div>
             </div>
         </div>
 
-        {/* Location Info (Map) Section - NEW */}
-        <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-10 text-center text-stone-900">오시는 길</h2>
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
-                {/* Text Info */}
-                <div className="w-full md:w-1/3 p-8 md:p-10 bg-stone-900 text-white flex flex-col justify-center gap-8">
-                    <div>
-                        <div className="flex items-center gap-3 mb-2 text-emerald-400">
-                            <MapPin className="w-5 h-5" />
-                            <h3 className="font-bold text-lg tracking-wide">주소</h3>
-                        </div>
-                        <p className="text-stone-300 leading-relaxed pl-8">
-                            경기도 김포시 김포한강7로22번길 123<br/>
-                            (구래동, 부추꽃더클래식)
-                        </p>
-                    </div>
-                    <div>
-                        <div className="flex items-center gap-3 mb-2 text-emerald-400">
-                            <Phone className="w-5 h-5" />
-                            <h3 className="font-bold text-lg tracking-wide">전화번호</h3>
-                        </div>
-                        <p className="text-white text-xl font-bold pl-8">031-998-8369</p>
-                    </div>
-                    <div>
-                        <div className="flex items-center gap-3 mb-2 text-emerald-400">
-                            <Clock className="w-5 h-5" />
-                            <h3 className="font-bold text-lg tracking-wide">상담 시간</h3>
-                        </div>
-                        <p className="text-stone-300 pl-8 text-sm">
-                            평일: 09:00 - 18:00<br/>
-                            주말/공휴일: 사전 예약제 운영
-                        </p>
-                    </div>
-                </div>
-                {/* Map iframe placeholder */}
-                <div className="w-full md:w-2/3 min-h-[300px] bg-stone-200 relative">
-                     <iframe 
-                        title="부추꽃더클래식 위치"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.419472719277!2d126.6347!3d37.6441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDM4JzM4LjgiTiAxMjbCsDM4JzA0LjkiRQ!5e0!3m2!1sko!2skr!4v1600000000000!5m2!1sko!2skr"
-                        width="100%" 
-                        height="100%" 
-                        style={{border:0}} 
-                        allowFullScreen={true} 
-                        loading="lazy" 
-                        className="absolute inset-0"
-                    ></iframe>
-                    {/* Note for the user: Actual Google Maps Embed requires an API key or specific embed link. Using a generic coordinate placeholder for now. */}
-                </div>
-            </div>
-        </div>
-
-
-        {/* Form Section */}
-        <div className="bg-white p-8 md:p-16 rounded-xl shadow-xl border border-stone-100">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-center text-stone-900">입소 대기 및 상담 신청</h2>
-            <p className="text-stone-600 mb-12 text-center text-base leading-relaxed break-keep max-w-2xl mx-auto">
-                자세히 적어주실수록 어르신의 성향을 파악하여<br/> 
-                <span className="font-bold text-emerald-700 bg-emerald-50">가장 편안하고 빠른 적응 계획</span>을 세울 수 있습니다.<br/>
-                <span className="text-sm text-stone-400 mt-2 block">(작성해주신 정보는 상담 목적으로만 사용되며 철저히 보호됩니다)</span>
+        {/* VIP Application Form */}
+        <div className="max-w-5xl mx-auto bg-white text-stone-900 rounded-3xl p-8 md:p-20 shadow-2xl reveal relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-stone-200 via-emerald-500 to-stone-200"></div>
+            
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-center mb-4">VIP 입소 대기 신청서</h2>
+            <p className="text-center text-stone-500 mb-16 max-w-2xl mx-auto">
+                작성해주신 내용을 바탕으로 <span className="text-emerald-700 font-bold">맞춤형 케어 플랜</span>을 미리 설계합니다.<br/>
+                모든 정보는 상담 목적 외에는 절대 사용되지 않습니다.
             </p>
 
             {submitted ? (
-                <div className="text-center py-20 bg-stone-50 rounded-lg border border-stone-200">
-                    <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                    </div>
-                    <h3 className="text-2xl font-bold text-emerald-700 mb-4">신청이 성공적으로 접수되었습니다.</h3>
-                    <p className="text-stone-600 leading-relaxed">입소 상담 전문 사회복지사가 내용을 꼼꼼히 검토 후,<br/>남겨주신 연락처로 24시간 이내에 연락드리겠습니다.</p>
+                <div className="text-center py-32 animate-fade-up">
+                    <CheckCircle2 className="w-24 h-24 text-emerald-500 mx-auto mb-8" />
+                    <h3 className="text-3xl font-bold text-stone-900 mb-4">신청이 완료되었습니다.</h3>
+                    <p className="text-stone-600 text-lg">
+                        담당 사회복지사가 내용 확인 후,<br/>
+                        <span className="font-bold text-emerald-700">24시간 이내</span>에 우선적으로 연락드리겠습니다.
+                    </p>
                 </div>
             ) : (
-                <form onSubmit={handleSubmit} className="space-y-10">
-                    {/* Section 1: Guardian Info */}
-                    <div>
-                        <h3 className="text-lg font-bold border-b-2 border-stone-800 pb-3 mb-6 flex items-center gap-3">
-                            <span className="bg-stone-800 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">1</span>
-                            보호자 정보
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">보호자 성함 <span className="text-red-500">*</span></label>
-                                <input required name="guardianName" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all" placeholder="홍길동" />
+                <form onSubmit={handleSubmit} className="space-y-12">
+                    {/* Form sections with premium styling */}
+                    {[
+                        { title: "보호자 정보", icon: "01", content: (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <InputField label="보호자 성함" name="guardianName" ph="성함 입력" req onChange={handleChange} />
+                                <InputField label="연락처" name="contact" ph="010-0000-0000" req onChange={handleChange} />
+                                <div className="md:col-span-2">
+                                    <InputField label="방문 경로" name="referralPath" ph="예: 네이버 검색, 지인 소개" onChange={handleChange} />
+                                </div>
                             </div>
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">연락처 <span className="text-red-500">*</span></label>
-                                <input required name="contact" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all" placeholder="010-1234-5678" />
+                        )},
+                        { title: "어르신 정보", icon: "02", content: (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <InputField label="어르신 성함" name="seniorName" ph="성함 입력" req onChange={handleChange} />
+                                <InputField label="생년월일 (또는 연세)" name="seniorDob" ph="예: 84세" req onChange={handleChange} />
+                                
+                                <SelectField label="성별" name="seniorGender" options={["여성", "남성"]} onChange={handleChange} />
+                                <InputField label="장기요양등급" name="careGrade" ph="예: 3등급, 없음" onChange={handleChange} />
+                                
+                                <InputField label="신장 / 체중" name="heightWeight" ph="예: 160cm / 50kg" onChange={handleChange} />
+                                <SelectField label="현재 계신 곳" name="currentLocation" options={["자택", "요양병원", "병원(대학/종합)", "주야간센터", "기타"]} onChange={handleChange} />
                             </div>
-                            <div className="md:col-span-2">
-                                <label className="block text-sm font-bold text-stone-600 mb-2">방문 경로</label>
-                                <input name="referralPath" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all" placeholder="예: 네이버 검색, 지인 소개, 블로그 등" />
+                        )},
+                        { title: "상세 돌봄 정보", icon: "03", content: (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="md:col-span-2">
+                                    <InputField label="주요 질병 및 병력" name="disease" ph="고혈압, 당뇨, 치매 등 상세 기재" onChange={handleChange} />
+                                </div>
+                                <SelectField label="식사 형태" name="dietType" options={["일반식", "다진식", "죽식", "갈은식(유동식)", "경관식(L-tube)"]} onChange={handleChange} />
+                                <SelectField label="기저귀 사용" name="diaper" options={["미사용", "밤에만 사용", "전일 사용"]} onChange={handleChange} />
+                                <SelectField label="보행 상태" name="walkState" options={["자립 보행", "지팡이/워커", "휠체어", "와상(침대)"]} onChange={handleChange} />
+                                <SelectField label="인지 상태 (치매)" name="cognitionState" options={["정상", "경증(깜빡함)", "중증(배회/망상)", "말기"]} onChange={handleChange} />
+                                <SelectField label="공격성/폭력성" name="violenceState" options={["없음(온순함)", "가끔 화냄", "거부 심함", "폭력성 있음"]} onChange={handleChange} />
+                                <div className="md:col-span-2">
+                                    <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">특이사항 및 요청사항</label>
+                                    <textarea 
+                                        name="notes" 
+                                        onChange={handleChange} 
+                                        rows={4} 
+                                        className="w-full border-b border-stone-300 py-3 focus:border-emerald-600 focus:outline-none transition-colors bg-transparent resize-none text-lg" 
+                                        placeholder="어르신이 좋아하시는 음식, 노래, 혹은 피해야 할 주제 등을 자유롭게 적어주세요." 
+                                    />
+                                </div>
                             </div>
+                        )}
+                    ].map((section) => (
+                        <div key={section.title} className="pb-8 border-b border-stone-100 last:border-0">
+                            <h3 className="flex items-center gap-4 mb-8">
+                                <span className="text-5xl font-serif font-bold text-stone-100 select-none">{section.icon}</span>
+                                <span className="text-xl font-bold text-stone-800">{section.title}</span>
+                            </h3>
+                            {section.content}
                         </div>
-                    </div>
+                    ))}
 
-                    {/* Section 2: Senior Info */}
-                    <div>
-                        <h3 className="text-lg font-bold border-b-2 border-stone-800 pb-3 mb-6 flex items-center gap-3">
-                            <span className="bg-stone-800 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">2</span>
-                            어르신 기본 정보
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">어르신 성함 <span className="text-red-500">*</span></label>
-                                <input required name="seniorName" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="어르신 성함" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">생년월일 (또는 연세) <span className="text-red-500">*</span></label>
-                                <input required name="seniorDob" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="예: 1940.01.01 (84세)" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">성별</label>
-                                <select name="seniorGender" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                                    <option value="female">여성</option>
-                                    <option value="male">남성</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">장기요양등급</label>
-                                <input name="careGrade" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="예: 3등급, 등급없음, 신청중" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">신장 / 체중 (대략)</label>
-                                <input name="heightWeight" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="예: 160cm / 50kg" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">종교</label>
-                                <input name="religion" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="무교, 기독교, 불교, 천주교 등" />
-                            </div>
-                             <div className="md:col-span-2">
-                                <label className="block text-sm font-bold text-stone-600 mb-2">현재 계신 곳</label>
-                                <select name="currentLocation" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                                    <option value="">선택해주세요</option>
-                                    <option value="home">자택</option>
-                                    <option value="hospital">병원 (대학/종합병원)</option>
-                                    <option value="nursing_hospital">요양병원</option>
-                                    <option value="care_center">주야간보호센터</option>
-                                    <option value="nursing_home">다른 요양원</option>
-                                    <option value="other">기타</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Section 3: Detailed Care Info */}
-                    <div>
-                         <h3 className="text-lg font-bold border-b-2 border-stone-800 pb-3 mb-6 flex items-center gap-3">
-                            <span className="bg-stone-800 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">3</span>
-                            상세 돌봄 정보 (적응을 위해 중요합니다)
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="md:col-span-2">
-                                <label className="block text-sm font-bold text-stone-600 mb-2">주요 질병 및 병력</label>
-                                <input name="disease" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="예: 고혈압, 당뇨, 뇌졸중 이력, 낙상 경험 등 상세히 적어주세요." />
-                            </div>
-                             <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">식사 형태</label>
-                                <select name="dietType" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                                    <option value="일반식">일반식 (씹어서 식사 가능)</option>
-                                    <option value="다진식">다진식 (잘게 썬 반찬)</option>
-                                    <option value="갈은식">갈은식 (죽 형태)</option>
-                                    <option value="죽식">죽식</option>
-                                    <option value="L-tube">경관식 (콧줄 사용)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">기저귀 사용 여부</label>
-                                <select name="diaper" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                                    <option value="미사용">미사용 (스스로 화장실 가능)</option>
-                                    <option value="병행">병행 (밤에만/가끔 실수)</option>
-                                    <option value="사용">사용 (와상/거동불편)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">수면 상태</label>
-                                <select name="sleepState" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                                    <option value="양호">양호 (잘 주무심)</option>
-                                    <option value="불편">자주 깨심/수면 장애</option>
-                                    <option value="약복용">수면제 복용 중</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">보행 상태</label>
-                                <select name="walkState" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                                    <option value="가능">자립 보행 가능</option>
-                                    <option value="보조기">지팡이/워커 사용</option>
-                                    <option value="휠체어">휠체어 이동</option>
-                                    <option value="불가능">와상 (침대 생활)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">인지 상태 (치매 여부)</label>
-                                <select name="cognitionState" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                                    <option value="양호">양호 (정상)</option>
-                                    <option value="초기">치매 초기/경증 (깜빡함)</option>
-                                    <option value="중기">치매 중기 (배회/망상)</option>
-                                    <option value="말기">치매 말기 (인지 불가)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-stone-600 mb-2">공격성/폭력성 (솔직하게 적어주세요)</label>
-                                <select name="violenceState" onChange={handleChange} className="w-full border border-stone-300 p-4 rounded-lg bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                                    <option value="없음">없음/온순함</option>
-                                    <option value="하">가끔 화냄 (욕설 등)</option>
-                                    <option value="중">거부 심함/밀치기</option>
-                                    <option value="상">폭력성 심함 (사전 상담 필수)</option>
-                                </select>
-                            </div>
-                             <div className="md:col-span-2">
-                                <label className="block text-sm font-bold text-stone-600 mb-2">기타 특이사항 (성격, 좋아하시는 것, 싫어하시는 것 등)</label>
-                                <textarea name="notes" onChange={handleChange} rows={4} className="w-full border border-stone-300 p-4 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="어르신이 좋아하시는 노래, 음식, 혹은 피해야 할 주제 등을 적어주세요. 저희가 어르신과 친해지는 데 큰 도움이 됩니다." />
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" className="w-full bg-stone-900 text-white font-bold py-5 rounded-lg text-xl hover:bg-emerald-900 transition-all shadow-xl hover:shadow-2xl mt-8">
-                        입소 상담 신청서 제출하기
+                    <button type="submit" className="w-full bg-stone-900 text-white font-bold py-6 rounded-xl text-xl hover:bg-emerald-900 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center justify-center gap-3">
+                        <Send className="w-6 h-6" />
+                        상담 신청서 제출하기
                     </button>
-                    <p className="text-center text-xs text-stone-400 mt-4">
-                        * 제출해주신 소중한 정보는 어르신의 입소 적합 여부 판단을 위해서만 사용됩니다.
-                    </p>
                 </form>
             )}
-        </div>
-
-        <div className="mt-24 text-center pb-12">
-             <div className="inline-block p-8 border-2 border-stone-200 rounded-xl bg-white">
-                <p className="text-stone-500 mb-2 font-medium">신청서 작성이 어려우신가요?</p>
-                <p className="text-2xl font-serif font-bold text-stone-900 mb-4">전화 주시면 친절하게 안내해 드립니다.</p>
-                <a 
-                    href="tel:031-998-8369"
-                    className="text-4xl md:text-5xl font-serif font-bold text-emerald-800 hover:text-emerald-600 transition-colors inline-block border-b-2 border-emerald-800 pb-1"
-                >
-                    031-998-8369
-                </a>
-                <p className="mt-6 text-sm text-stone-400">
-                    평일 09:00 - 18:00 <br/> (주말/공휴일은 예약 상담만 진행합니다)
-                </p>
-            </div>
         </div>
       </div>
     </section>
   );
 };
+
+// UI Helpers
+const InputField = ({ label, name, ph, req, onChange }: any) => (
+    <div>
+        <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">{label} {req && <span className="text-emerald-500">*</span>}</label>
+        <input 
+            required={req} 
+            name={name} 
+            onChange={onChange} 
+            className="w-full border-b border-stone-300 py-3 focus:border-emerald-600 focus:outline-none transition-colors bg-transparent text-lg placeholder-stone-300" 
+            placeholder={ph} 
+        />
+    </div>
+);
+
+const SelectField = ({ label, name, options, onChange }: any) => (
+    <div>
+        <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">{label}</label>
+        <div className="relative">
+            <select name={name} onChange={onChange} className="w-full border-b border-stone-300 py-3 focus:border-emerald-600 focus:outline-none transition-colors bg-transparent text-lg appearance-none cursor-pointer">
+                {options.map((opt: string) => <option key={opt} value={opt}>{opt}</option>)}
+            </select>
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-stone-400">▼</div>
+        </div>
+    </div>
+);
 
 export default ContactSection;

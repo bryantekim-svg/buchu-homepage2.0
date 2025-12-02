@@ -4,7 +4,6 @@ import { Menu, X } from 'lucide-react';
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Function to handle scroll to section smoothly
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
@@ -15,70 +14,72 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 py-4 md:py-6 mix-blend-difference text-white transition-all duration-300">
-        <div className="w-full px-6 md:px-12 flex justify-between items-center">
-          {/* Logo - Increased Size */}
-          <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block">
+      <header 
+        className="fixed top-0 left-0 right-0 z-40 py-8 transition-all duration-700 mix-blend-difference text-white"
+      >
+        <div className="w-full max-w-[1920px] mx-auto px-6 md:px-16 flex justify-between items-center h-20 md:h-28">
+          
+          {/* Logo - Large Size & Blend Mode for visibility */}
+          <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block relative group">
             <img 
               src="./logo.png" 
               alt="부추꽃더클래식" 
-              className="h-16 md:h-24 w-auto object-contain brightness-0 invert"
+              className="object-contain h-24 md:h-32 brightness-0 invert"
               onError={(e) => {
-                // Fallback if image fails
                 e.currentTarget.style.display = 'none';
                 e.currentTarget.nextElementSibling?.classList.remove('hidden');
               }}
             />
             {/* Fallback Text Logo */}
-            <span className="hidden font-serif text-2xl md:text-3xl font-bold tracking-tighter whitespace-nowrap">
+            <span className="hidden font-serif text-3xl md:text-5xl font-bold tracking-tighter whitespace-nowrap">
               부추꽃더클래식
             </span>
           </a>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-12">
-            <button onClick={() => scrollToSection('reality')} className="text-base font-medium uppercase tracking-widest hover:text-emerald-400 transition-colors">Reality</button>
-            <button onClick={() => scrollToSection('philosophy')} className="text-base font-medium uppercase tracking-widest hover:text-emerald-400 transition-colors">Philosophy</button>
-            <button onClick={() => scrollToSection('walk')} className="text-base font-medium uppercase tracking-widest hover:text-emerald-400 transition-colors">Lifestyle</button>
+          {/* Desktop Nav - Mix Blend Difference handles contrast automatically */}
+          <nav className="hidden md:flex items-center gap-16">
+            {['REALITY', 'PHILOSOPHY', 'LIFESTYLE'].map((item) => (
+                <button 
+                    key={item}
+                    onClick={() => scrollToSection(item.toLowerCase() === 'lifestyle' ? 'walk' : item.toLowerCase())} 
+                    className="text-xs font-bold hover:opacity-70 uppercase tracking-[0.25em] transition-all hover:-translate-y-1 relative group py-2"
+                >
+                    {item}
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </button>
+            ))}
+            
             <button 
               onClick={() => scrollToSection('contact')}
-              className="px-8 py-3 border border-white rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300"
+              className="px-10 py-4 border border-white rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-500 transform hover:scale-105"
             >
-              상담 예약
+              Consultation
             </button>
           </nav>
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-white"
-            onClick={() => setMobileMenuOpen(true)}
+            className="md:hidden z-50 p-2 hover:opacity-70 transition-opacity"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <Menu size={32} />
+            {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
           </button>
         </div>
       </header>
 
       {/* Mobile Nav Overlay */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[60] bg-stone-950/95 backdrop-blur-xl text-white flex flex-col p-8">
-          <div className="flex justify-end mb-12">
-            <button onClick={() => setMobileMenuOpen(false)} className="p-2">
-              <X size={36} />
-            </button>
-          </div>
-          <nav className="flex flex-col gap-8 text-2xl font-serif items-center">
-             <img 
-              src="./logo.png" 
-              alt="Logo" 
-              className="h-24 mb-8 brightness-0 invert" 
-            />
-            <button onClick={() => scrollToSection('reality')} className="hover:text-emerald-400 transition-colors">현실 점검</button>
-            <button onClick={() => scrollToSection('philosophy')} className="hover:text-emerald-400 transition-colors">공간과 철학</button>
-            <button onClick={() => scrollToSection('walk')} className="hover:text-emerald-400 transition-colors">산책이 있는 삶</button>
-            <button onClick={() => scrollToSection('contact')} className="mt-8 px-10 py-4 bg-white text-black rounded-full text-lg font-bold">상담 예약하기</button>
+      <div className={`fixed inset-0 z-50 bg-stone-950 flex flex-col items-center justify-center transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+          <button className="absolute top-8 right-8 text-white p-4" onClick={() => setMobileMenuOpen(false)}>
+            <X size={32} />
+          </button>
+          <div className="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+          <nav className="flex flex-col gap-10 text-3xl font-serif items-center relative z-10 text-white">
+            <button onClick={() => scrollToSection('reality')} className="text-stone-400 hover:text-white transition-colors duration-300 hover:scale-110">현실 점검</button>
+            <button onClick={() => scrollToSection('philosophy')} className="text-stone-400 hover:text-white transition-colors duration-300 hover:scale-110">공간과 철학</button>
+            <button onClick={() => scrollToSection('walk')} className="text-stone-400 hover:text-white transition-colors duration-300 hover:scale-110">산책이 있는 삶</button>
+            <button onClick={() => scrollToSection('contact')} className="mt-8 px-12 py-5 bg-white text-stone-950 rounded-full text-xl font-bold shadow-2xl hover:bg-emerald-500 hover:text-white transition-all">상담 예약하기</button>
           </nav>
-        </div>
-      )}
+      </div>
     </>
   );
 };

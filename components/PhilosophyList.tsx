@@ -45,46 +45,47 @@ const PhilosophyList: React.FC = () => {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const observers = sectionRefs.current.map((ref, index) => {
-      if (!ref) return null;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveId(items[index].id);
-          }
-        },
-        { threshold: 0.4 }
-      );
-      observer.observe(ref);
-      return observer;
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = Number(entry.target.getAttribute('data-index'));
+          setActiveId(items[index].id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      threshold: 0.5,
     });
 
-    return () => {
-      observers.forEach(obs => obs?.disconnect());
-    };
-  }, []);
+    sectionRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, [items]);
 
   return (
-    <section id="philosophy" className="bg-stone-900 text-white min-h-screen relative">
+    <section id="philosophy" className="bg-stone-950 text-white min-h-screen relative">
       <div className="flex flex-col md:flex-row">
         
         {/* Sticky Sidebar */}
-        <div className="hidden md:flex md:w-1/3 md:h-screen sticky top-0 flex-col justify-center px-8 py-12 md:pl-24 z-20 bg-stone-950 border-r border-white/10">
-          <p className="text-emerald-500 text-sm tracking-[0.3em] uppercase mb-12 font-bold">The Philosophy</p>
+        <div className="hidden md:flex md:w-1/3 md:h-screen sticky top-0 flex-col justify-center px-10 py-12 md:pl-24 z-20 bg-stone-950 border-r border-white/5 shadow-2xl">
+          <p className="text-emerald-500 text-xs tracking-[0.4em] uppercase mb-16 font-bold">The Philosophy</p>
           <ul className="space-y-12">
             {items.map((item) => (
               <li key={item.id} className="relative group cursor-pointer">
                 <a 
                   href={`#${item.id}`}
                   onClick={(e) => { e.preventDefault(); document.getElementById(item.id)?.scrollIntoView({behavior:'smooth'}); }}
-                  className={`text-3xl md:text-5xl font-serif transition-all duration-500 block flex items-center gap-4 ${
+                  className={`text-4xl lg:text-5xl font-serif transition-all duration-700 block flex items-center gap-4 ${
                     activeId === item.id 
-                      ? 'text-white translate-x-4 opacity-100 font-bold' 
-                      : 'text-stone-700 group-hover:text-stone-500 opacity-60'
+                      ? 'text-white translate-x-4 font-bold scale-105' 
+                      : 'text-stone-700 group-hover:text-stone-500'
                   }`}
                 >
-                  <span className="text-sm tracking-normal font-sans text-emerald-600 block mb-1 absolute -top-6 left-0 w-full">
-                    {activeId === item.id ? item.tagline : ''}
+                  <span className={`text-xs tracking-normal font-sans text-emerald-500 block mb-1 absolute -top-5 left-0 w-full transition-opacity duration-500 ${activeId === item.id ? 'opacity-100' : 'opacity-0'}`}>
+                    {item.tagline}
                   </span>
                   {item.title}
                 </a>
@@ -99,37 +100,35 @@ const PhilosophyList: React.FC = () => {
             <div 
               key={item.id} 
               id={item.id}
+              data-index={index}
               ref={(el) => { sectionRefs.current[index] = el; }}
-              className="min-h-screen flex flex-col justify-center p-6 md:p-24 border-b border-white/5 relative overflow-hidden group bg-stone-900"
+              className="min-h-screen flex flex-col justify-center p-8 md:p-32 border-b border-white/5 relative overflow-hidden group"
             >
-              {/* Background Image Fade In */}
-              <div className="absolute inset-0 z-0 bg-stone-800">
+              {/* Background Image with Parallax-like scaling */}
+              <div className="absolute inset-0 z-0 bg-stone-900 overflow-hidden">
                  <img 
                     src={item.image} 
                     alt={item.title} 
-                    className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-all duration-1000 scale-105 group-hover:scale-100" 
-                    onError={(e) => { 
-                        // 이미지가 없을 경우 숨기고 배경색만 보이게 함
-                        e.currentTarget.style.display = 'none'; 
-                    }}
+                    className="w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-all duration-[2s] scale-110 group-hover:scale-100" 
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
-                 {/* 텍스트 가독성을 위한 그라디언트 오버레이 */}
-                 <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/80 to-stone-900/30"></div>
+                 {/* Darker gradient overlay for better text readability */}
+                 <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/90 to-transparent"></div>
               </div>
 
-              <div className="relative z-10 max-w-3xl mt-20 md:mt-0">
+              <div className="relative z-10 max-w-4xl mt-20 md:mt-0 reveal">
                  <span className="md:hidden text-emerald-400 text-sm font-bold uppercase tracking-widest mb-4 block">
                     {item.tagline}
                  </span>
-                 <h3 className="text-3xl md:text-5xl font-serif font-bold mb-8 text-white leading-tight break-keep whitespace-pre-line drop-shadow-xl">
+                 <h3 className="text-4xl md:text-6xl font-serif font-bold mb-10 text-white leading-tight break-keep whitespace-pre-line drop-shadow-2xl">
                     {item.subtitle}
                  </h3>
-                 <div className="h-1 w-24 bg-emerald-600 mb-10 shadow-[0_0_10px_rgba(5,150,105,0.5)]"></div>
-                 <p className="text-stone-100 text-xl md:text-2xl leading-relaxed mb-8 font-medium break-keep drop-shadow-lg">
+                 <div className="h-1 w-24 bg-emerald-600 mb-12 shadow-[0_0_15px_rgba(5,150,105,0.8)] rounded-full"></div>
+                 <p className="text-stone-100 text-xl md:text-2xl leading-relaxed mb-10 font-light break-keep drop-shadow-lg">
                     {item.content}
                  </p>
-                 <div className="bg-black/50 backdrop-blur-md p-6 md:p-8 rounded-lg border-l-4 border-stone-500 shadow-xl">
-                    <p className="text-stone-200 text-base md:text-lg leading-loose break-keep">
+                 <div className="bg-white/5 backdrop-blur-xl p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl hover:bg-white/10 transition-colors">
+                    <p className="text-stone-300 text-base md:text-lg leading-loose break-keep">
                         {item.subContent}
                     </p>
                  </div>

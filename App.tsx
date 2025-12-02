@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import EmpathyStory from './components/EmpathyStory';
 import RealityScroll from './components/RealityScroll';
 import PhilosophyList from './components/PhilosophyList';
 import ClimaxWalk from './components/ClimaxWalk';
@@ -32,11 +33,13 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-black text-white">
+    <div className="min-h-screen flex flex-col font-sans bg-black text-white selection:bg-emerald-500 selection:text-white">
       <Header />
       
       <main className="flex-grow">
         <Hero />
+        {/* 공감 스토리: 문제 인식 -> 해결책 제시의 가교 역할 */}
+        <EmpathyStory />
         <RealityScroll />
         <PhilosophyList />
         <ClimaxWalk />

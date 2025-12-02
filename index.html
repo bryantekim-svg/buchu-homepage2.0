@@ -3,11 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>부추꽃더클래식 | The Classic</title>
+    
+    <!-- SEO Optimization: Google/Naver -->
+    <title>부추꽃더클래식 | 대한민국 상위 1% 프리미엄 요양원 (김포/서울근교)</title>
+    <meta name="description" content="김포 한강신도시 위치, 도심 속 자연을 품은 프리미엄 1인실 요양원. 세브란스 출신 의료진, 1.5배 인력 배치, 호텔식 시설. 부모님을 위한 최고의 선택." />
+    <meta name="keywords" content="요양원, 고급요양원, 프리미엄요양원, 김포요양원, 서울요양원, 서울근교요양원, 1인실요양원, 호텔식요양원, 부추꽃더클래식, 재활요양원, 치매요양원, 구래동요양원" />
+    <meta name="author" content="부추꽃더클래식" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.buchukkot.com" />
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="부추꽃더클래식 - 엄마가 살고 싶은 집" />
+    <meta property="og:description" content="존엄과 자유가 있는 프리미엄 1인실 요양원. 삭막한 병원이 아닌, 살아있는 삶을 선물합니다." />
+    <meta property="og:image" content="./hero.jpg" />
+    <meta property="og:url" content="https://www.buchukkot.com" />
+    <meta property="og:site_name" content="부추꽃더클래식" />
+    <meta property="og:locale" content="ko_KR" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
@@ -25,19 +42,29 @@
                 900: '#1c1917',
                 950: '#0c0a09',
               },
+              emerald: {
+                900: '#064e3b',
+                950: '#022c22',
+              }
             },
             animation: {
-              'marquee': 'marquee 25s linear infinite',
-              'fadeInUp': 'fadeInUp 1s ease-out forwards',
+              'fade-up': 'fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'fade-in': 'fadeIn 1.5s ease-out forwards',
+              'parallax': 'parallax 20s ease-in-out infinite alternate',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             },
             keyframes: {
-              marquee: {
-                '0%': { transform: 'translateX(0%)' },
-                '100%': { transform: 'translateX(-100%)' },
-              },
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
+              fadeUp: {
+                '0%': { opacity: '0', transform: 'translateY(60px)' },
                 '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              parallax: {
+                '0%': { transform: 'scale(1)' },
+                '100%': { transform: 'scale(1.1)' },
               }
             }
           }
@@ -46,20 +73,49 @@
     </script>
     <style>
       body {
-        background-color: #000000;
+        background-color: #0c0a09; /* Stone 950 */
         color: #ffffff;
         overflow-x: hidden;
       }
-      .no-scrollbar::-webkit-scrollbar {
-          display: none;
+      
+      /* Premium Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
       }
-      .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
+      ::-webkit-scrollbar-track {
+        background: #0c0a09;
       }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 5px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #10b981;
+      }
+
       ::selection {
-        background-color: #ffffff;
-        color: #000000;
+        background-color: #10b981; /* Emerald 500 */
+        color: #ffffff;
+      }
+      
+      /* Apple-style Scroll Reveal Class */
+      .reveal {
+        opacity: 0;
+        transform: translateY(50px) scale(0.98);
+        transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); /* Apple's easing */
+        will-change: transform, opacity;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      
+      /* Smooth Image Hover */
+      .img-hover-scale {
+        transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .img-hover-scale:hover {
+        transform: scale(1.05);
       }
     </style>
   <script type="importmap">
@@ -77,7 +133,31 @@
 </head>
   <body>
     <div id="root"></div>
-    <!-- 아래 스크립트가 있어야 Vercel 및 로컬에서 React가 실행됩니다 -->
     <script type="module" src="/index.tsx"></script>
+    
+    <!-- Intersection Observer for Scroll Animations -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        // Observe elements added dynamically
+        const observeElements = () => {
+          const elements = document.querySelectorAll('.reveal');
+          elements.forEach(el => observer.observe(el));
+        };
+        
+        // Initial check
+        observeElements();
+        
+        // Check periodically for new elements (React rendering)
+        setInterval(observeElements, 1000);
+      });
+    </script>
   </body>
 </html>
