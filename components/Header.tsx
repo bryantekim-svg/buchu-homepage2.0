@@ -15,11 +15,11 @@ const Header: React.FC = () => {
   return (
     <>
       <header 
-        className="fixed top-0 left-0 right-0 z-40 py-8 transition-all duration-700 mix-blend-difference text-white"
+        className="fixed top-0 left-0 right-0 z-50 py-8 transition-all duration-700 mix-blend-difference text-white pointer-events-none"
       >
-        <div className="w-full max-w-[1920px] mx-auto px-6 md:px-16 flex justify-between items-center h-20 md:h-28">
+        <div className="w-full max-w-[1920px] mx-auto px-6 md:px-16 flex justify-between items-center h-20 md:h-28 pointer-events-auto">
           
-          {/* Logo - Large Size & Blend Mode for visibility */}
+          {/* Logo */}
           <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block relative group">
             <img 
               src="./logo.png" 
@@ -30,13 +30,12 @@ const Header: React.FC = () => {
                 e.currentTarget.nextElementSibling?.classList.remove('hidden');
               }}
             />
-            {/* Fallback Text Logo */}
             <span className="hidden font-serif text-3xl md:text-5xl font-bold tracking-tighter whitespace-nowrap">
               부추꽃더클래식
             </span>
           </a>
 
-          {/* Desktop Nav - Mix Blend Difference handles contrast automatically */}
+          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-16">
             {['REALITY', 'PHILOSOPHY', 'LIFESTYLE'].map((item) => (
                 <button 
@@ -68,7 +67,7 @@ const Header: React.FC = () => {
       </header>
 
       {/* Mobile Nav Overlay */}
-      <div className={`fixed inset-0 z-50 bg-stone-950 flex flex-col items-center justify-center transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+      <div className={`fixed inset-0 z-[60] bg-stone-950 flex flex-col items-center justify-center transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
           <button className="absolute top-8 right-8 text-white p-4" onClick={() => setMobileMenuOpen(false)}>
             <X size={32} />
           </button>

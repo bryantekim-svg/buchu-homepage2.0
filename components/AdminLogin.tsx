@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Lock, ShieldCheck } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 interface AdminLoginProps {
   onLogin: () => void;
@@ -13,7 +13,6 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onCancel }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // 요청하신 계정 정보
     if (username === 'buchu365' && password === 'a506023z4?') {
       onLogin();
     } else {
@@ -22,12 +21,14 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onCancel }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-stone-950/95 backdrop-blur-xl flex items-center justify-center p-4">
+    <div 
+        className="fixed inset-0 z-[9999] bg-stone-950/98 backdrop-blur-xl flex items-center justify-center p-4"
+        style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+    >
       <div 
-        className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 w-full max-w-md border border-stone-200 reveal active relative overflow-hidden"
-        onClick={(e) => e.stopPropagation()} // Prevent clicks from bubbling
+        className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 w-full max-w-md border border-stone-200 relative overflow-hidden"
+        onClick={(e) => e.stopPropagation()} 
       >
-        {/* Decorative Top Bar */}
         <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-stone-800 via-emerald-600 to-stone-800"></div>
 
         <div className="flex justify-center mb-8">
@@ -44,30 +45,26 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onCancel }) => {
             <label className="block text-xs font-bold text-stone-500 uppercase tracking-widest mb-2 ml-1">ID</label>
             <input 
               type="text" 
-              name="admin_username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 focus:ring-2 focus:ring-emerald-600 focus:border-transparent outline-none transition-all placeholder-stone-300 font-sans"
-              placeholder="아이디를 입력하세요"
+              className="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 focus:ring-2 focus:ring-emerald-600 outline-none transition-all font-sans text-lg"
+              placeholder="아이디"
               autoFocus
-              autoComplete="off"
             />
           </div>
           <div>
             <label className="block text-xs font-bold text-stone-500 uppercase tracking-widest mb-2 ml-1">Password</label>
             <input 
               type="password" 
-              name="admin_password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 focus:ring-2 focus:ring-emerald-600 focus:border-transparent outline-none transition-all placeholder-stone-300 font-sans"
-              placeholder="비밀번호를 입력하세요"
-              autoComplete="new-password"
+              className="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 focus:ring-2 focus:ring-emerald-600 outline-none transition-all font-sans text-lg"
+              placeholder="비밀번호"
             />
           </div>
 
           {error && (
-            <div className="p-4 bg-red-50 text-red-600 text-sm text-center rounded-lg border border-red-100 animate-pulse font-bold">
+            <div className="p-4 bg-red-50 text-red-600 text-sm text-center rounded-lg border border-red-100 font-bold">
                 {error}
             </div>
           )}
@@ -78,11 +75,11 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onCancel }) => {
               onClick={onCancel}
               className="flex-1 py-4 text-stone-500 hover:text-stone-900 hover:bg-stone-100 rounded-lg transition-colors font-bold text-sm"
             >
-              홈으로 돌아가기
+              취소
             </button>
             <button 
               type="submit" 
-              className="flex-1 py-4 bg-stone-900 text-white rounded-lg hover:bg-emerald-900 transition-all shadow-lg hover:shadow-xl font-bold tracking-wide text-sm transform active:scale-95"
+              className="flex-1 py-4 bg-stone-900 text-white rounded-lg hover:bg-emerald-900 transition-all shadow-lg font-bold text-sm"
             >
               로그인
             </button>

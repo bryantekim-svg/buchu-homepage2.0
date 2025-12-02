@@ -1,143 +1,85 @@
-import React, { useEffect, useRef, useState } from 'react';
-
-interface PhilosophyItem {
-  id: string;
-  title: string;
-  tagline: string;
-  subtitle: string;
-  content: string;
-  subContent: string;
-  image: string;
-}
+import React from 'react';
 
 const PhilosophyList: React.FC = () => {
-  const items: PhilosophyItem[] = [
+  const items = [
     {
       id: 'space',
-      title: 'Space',
-      tagline: '철학 01. 공간',
-      subtitle: '적응의 시작,\n내 집보다 편안한 \'나만의 방\'',
-      content: '남의 눈치를 보지 않고 숨을 고를 수 있는 독립된 공간이 필수적입니다. 저희는 수익성을 포기하고 과감하게 1인실(80%)과 2인실(20%) 위주로 설계했습니다.',
-      subContent: '방문을 닫으면 온전한 휴식이 보장되는 곳. 나의 가구, 나의 냄새, 나의 추억이 깃든 물건들을 그대로 가져오세요. 낯선 시설이 아닌, "새로운 내 집"이라고 느낄 때 어르신은 비로소 마음의 안정을 찾고 건강을 회복하십니다.',
-      image: './room.jpg' 
+      tag: '01 SPACE',
+      title: '감옥 같은 다인실이 아닌,\n호텔 같은 \'나만의 집\'',
+      desc: '다인실의 소음과 시선은 어르신을 병들게 합니다.\n우리는 수익성을 포기하고, 과감하게 프라이빗 1인실 위주로 설계했습니다.',
+      detail: '내 집처럼 편안한 가구, 독립된 화장실, 탁 트인 창문.\n자존감을 지키는 공간에서 어르신은 비로소 안정을 되찾습니다.',
+      img: './room.jpg'
     },
     {
       id: 'people',
-      title: 'People',
-      tagline: '철학 02. 사람',
-      subtitle: '외롭지 않게 곁을 지키는\n따뜻한 \'친구\'',
-      content: '호텔 같은 시설도 사람이 없으면 차가운 감옥일 뿐입니다. 어르신의 마음을 여는 것은 결국 사람의 온기입니다. 저희는 공단 기준 1.5배의 전문 인력을 배치하여 진심 어린 케어를 실현합니다.',
-      subContent: '직원들에게 \'마음의 여유\'가 있어야 그 사랑이 어르신께 향합니다. 시간에 쫓기지 않는 선생님이 어르신의 눈을 한 번 더 맞추고, 손을 한 번 더 잡아드립니다. 단순한 기저귀 교체나 식사 보조를 넘어, 말벗이 되어드리고 정서적 교감을 나누는 것. 그것이 부추꽃더클래식이 약속하는 \'사람 중심\'의 케어입니다.',
-      image: './hug.jpg' 
+      tag: '02 PEOPLE',
+      title: '방치되는 시간이 없는\n1.5배의 촘촘한 케어',
+      desc: '시설이 좋아도 사람이 없으면 방치입니다.\n법적 기준을 훨씬 웃도는 1.5배의 전문 인력이 24시간 어르신 곁을 지킵니다.',
+      detail: '시간에 쫓기지 않는 선생님은 어르신의 눈을 한 번 더 맞춥니다.\n단순한 수발이 아닌, 정서적 교감을 나누는 진짜 가족이 되어드립니다.',
+      img: './hug.jpg'
     },
     {
       id: 'safety',
-      title: 'Safety',
-      tagline: '철학 03. 안전',
-      subtitle: '불안하지 않은\n완벽한 의료 안전망',
-      content: '"혹시 밤에 아프시면 어쩌지?" 하는 걱정, 이제 내려놓으세요. 세브란스 병원 출신 원장의 노하우와 협력 병원 핫라인이 24시간 든든하게 어르신을 지킵니다.',
-      subContent: '우리는 병원처럼 삭막하게 통제하지 않습니다. 겉으로는 자유로운 가정집 같지만, 보이지 않는 곳에서는 대학병원급의 꼼꼼한 건강 관리가 이루어집니다. 매일의 바이탈 체크부터 응급 상황 대처까지, 전문가가 24시간 곁에 있습니다. 어르신은 편안한 일상을 누리시고, 안전은 저희가 책임지겠습니다.',
-      image: './hospital.jpg' 
+      tag: '03 SAFETY',
+      title: '대학병원급 의료 시스템이\n지키는 안전한 일상',
+      desc: '집보다 안전해야 요양원입니다.\n세브란스 병원 출신 원장의 노하우와 협력 병원 핫라인이 골든타임을 지킵니다.',
+      detail: '매일의 바이탈 체크부터 응급 상황 대처까지.\n보이지 않는 곳에서 작동하는 완벽한 의료 안전망이 있기에, 보호자님은 두 다리 뻗고 주무실 수 있습니다.',
+      img: './hospital.jpg'
     }
   ];
 
-  const [activeId, setActiveId] = useState('space');
-  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const index = Number(entry.target.getAttribute('data-index'));
-          setActiveId(items[index].id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.5,
-    });
-
-    sectionRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => observer.disconnect();
-  }, [items]);
-
   return (
-    <section id="philosophy" className="bg-stone-950 text-white min-h-screen relative">
-      <div className="flex flex-col md:flex-row">
-        
-        {/* Sticky Sidebar */}
-        <div className="hidden md:flex md:w-1/3 md:h-screen sticky top-0 flex-col justify-center px-10 py-12 md:pl-24 z-20 bg-stone-950 border-r border-white/5 shadow-2xl">
-          <p className="text-emerald-500 text-xs tracking-[0.4em] uppercase mb-16 font-bold">The Philosophy</p>
-          <ul className="space-y-12">
-            {items.map((item) => (
-              <li key={item.id} className="relative group cursor-pointer">
-                <a 
-                  href={`#${item.id}`}
-                  onClick={(e) => { e.preventDefault(); document.getElementById(item.id)?.scrollIntoView({behavior:'smooth'}); }}
-                  className={`text-4xl lg:text-5xl font-serif transition-all duration-700 block flex items-center gap-4 ${
-                    activeId === item.id 
-                      ? 'text-white translate-x-4 font-bold scale-105' 
-                      : 'text-stone-700 group-hover:text-stone-500'
-                  }`}
-                >
-                  <span className={`text-xs tracking-normal font-sans text-emerald-500 block mb-1 absolute -top-5 left-0 w-full transition-opacity duration-500 ${activeId === item.id ? 'opacity-100' : 'opacity-0'}`}>
-                    {item.tagline}
-                  </span>
-                  {item.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Scrolling Content */}
-        <div className="w-full md:w-2/3">
-          {items.map((item, index) => (
-            <div 
-              key={item.id} 
-              id={item.id}
-              data-index={index}
-              ref={(el) => { sectionRefs.current[index] = el; }}
-              className="min-h-screen flex flex-col justify-center p-8 md:p-32 border-b border-white/5 relative overflow-hidden group"
-            >
-              {/* Background Image with Parallax-like scaling */}
-              <div className="absolute inset-0 z-0 bg-stone-900 overflow-hidden">
-                 <img 
-                    src={item.image} 
+    <section id="philosophy" className="bg-stone-950 relative">
+      {items.map((item, idx) => (
+        <div key={item.id} className="relative w-full">
+          {/* 
+            Container Height Control: 
+            Allows scrolling 'through' the image before text appears. 
+            Total height approx 200vh-250vh.
+          */}
+          <div className="h-[230vh] relative z-10">
+            
+            {/* Sticky Image Section */}
+            <div className="sticky top-0 w-full h-screen overflow-hidden">
+                <img 
+                    src={item.img} 
                     alt={item.title} 
-                    className="w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-all duration-[2s] scale-110 group-hover:scale-100" 
+                    className="w-full h-full object-cover transition-transform duration-[2s] ease-out hover:scale-105"
                     onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
-                 {/* Darker gradient overlay for better text readability */}
-                 <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/90 to-transparent"></div>
-              </div>
-
-              <div className="relative z-10 max-w-4xl mt-20 md:mt-0 reveal">
-                 <span className="md:hidden text-emerald-400 text-sm font-bold uppercase tracking-widest mb-4 block">
-                    {item.tagline}
-                 </span>
-                 <h3 className="text-4xl md:text-6xl font-serif font-bold mb-10 text-white leading-tight break-keep whitespace-pre-line drop-shadow-2xl">
-                    {item.subtitle}
-                 </h3>
-                 <div className="h-1 w-24 bg-emerald-600 mb-12 shadow-[0_0_15px_rgba(5,150,105,0.8)] rounded-full"></div>
-                 <p className="text-stone-100 text-xl md:text-2xl leading-relaxed mb-10 font-light break-keep drop-shadow-lg">
-                    {item.content}
-                 </p>
-                 <div className="bg-white/5 backdrop-blur-xl p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl hover:bg-white/10 transition-colors">
-                    <p className="text-stone-300 text-base md:text-lg leading-loose break-keep">
-                        {item.subContent}
-                    </p>
-                 </div>
-              </div>
+                {/* Initial dark overlay for subtle readability if needed, but mostly clear */}
+                <div className="absolute inset-0 bg-stone-950/10"></div>
             </div>
-          ))}
-        </div>
 
-      </div>
+            {/* Scroll Trigger Spacer */}
+            {/* This empty space ensures the user sees ONLY the photo for the first part of the scroll */}
+            <div className="absolute top-0 w-full h-[80vh] pointer-events-none"></div>
+
+            {/* Text Content Overlay */}
+            {/* This slides up over the sticky image as you keep scrolling */}
+            <div className="relative z-20 flex flex-col justify-center min-h-screen bg-gradient-to-b md:bg-gradient-to-r from-stone-950 via-stone-950/90 to-transparent pt-32 md:pt-0 px-6 md:px-24">
+                <div className="max-w-3xl reveal">
+                    <span className="text-emerald-500 font-bold tracking-[0.4em] text-sm md:text-base mb-8 block animate-pulse-slow">
+                        THE SOLUTION {item.tag}
+                    </span>
+                    <h2 className="text-4xl md:text-7xl font-serif font-bold text-white mb-10 leading-[1.1] whitespace-pre-line drop-shadow-2xl">
+                        {item.title}
+                    </h2>
+                    <div className="w-24 h-1.5 bg-emerald-600 mb-12 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.5)]"></div>
+                    <p className="text-xl md:text-3xl text-stone-200 font-light leading-relaxed mb-10 whitespace-pre-line drop-shadow-lg">
+                        {item.desc}
+                    </p>
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-12 rounded-2xl max-w-2xl transform hover:-translate-y-2 transition-transform duration-500 shadow-2xl">
+                        <p className="text-stone-300 text-lg md:text-xl leading-loose whitespace-pre-line">
+                            {item.detail}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      ))}
     </section>
   );
 };
