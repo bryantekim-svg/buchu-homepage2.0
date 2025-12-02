@@ -46,7 +46,7 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 text-sm font-light tracking-wide">
                     <div className="space-y-2">
                         <span className="block text-emerald-700/70 text-[10px] uppercase font-bold tracking-widest">Representative</span>
-                        <p className="text-stone-200 text-lg font-medium">김선규 외 4명</p>
+                        <p className="text-stone-200 text-lg font-medium">김선규 외 3명</p>
                     </div>
                     <div className="space-y-2">
                         <span className="block text-emerald-700/70 text-[10px] uppercase font-bold tracking-widest">Registration No.</span>
