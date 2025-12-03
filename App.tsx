@@ -5,6 +5,7 @@ import EmpathyStory from './components/EmpathyStory';
 import RealityScroll from './components/RealityScroll';
 import PhilosophyList from './components/PhilosophyList';
 import ClimaxWalk from './components/ClimaxWalk';
+import Testimonial from './components/Testimonial';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import AdminDashboard from './components/AdminDashboard';
@@ -41,6 +42,7 @@ const App: React.FC = () => {
         <RealityScroll />
         <PhilosophyList />
         <ClimaxWalk />
+        <Testimonial />
         <ContactSection />
       </main>
       <Footer onAdminClick={() => setIsAdminMode(true)} />
