@@ -66,17 +66,17 @@ const Header: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile Nav Overlay */}
+      {/* Mobile Nav Overlay - Gold Theme & Larger Fonts */}
       <div className={`fixed inset-0 z-[60] bg-stone-950 flex flex-col items-center justify-center transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
           <button className="absolute top-8 right-8 text-white p-4" onClick={() => setMobileMenuOpen(false)}>
             <X size={32} />
           </button>
           <div className="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
-          <nav className="flex flex-col gap-10 text-3xl font-serif items-center relative z-10 text-white">
-            <button onClick={() => scrollToSection('reality')} className="text-stone-400 hover:text-white transition-colors duration-300 hover:scale-110">현실 점검</button>
-            <button onClick={() => scrollToSection('philosophy')} className="text-stone-400 hover:text-white transition-colors duration-300 hover:scale-110">공간과 철학</button>
-            <button onClick={() => scrollToSection('walk')} className="text-stone-400 hover:text-white transition-colors duration-300 hover:scale-110">산책이 있는 삶</button>
-            <button onClick={() => scrollToSection('contact')} className="mt-8 px-12 py-5 bg-white text-stone-950 rounded-full text-xl font-bold shadow-2xl hover:bg-emerald-500 hover:text-white transition-all">상담 예약하기</button>
+          <nav className="flex flex-col gap-12 text-4xl font-serif items-center relative z-10 text-white">
+            <button onClick={() => scrollToSection('reality')} className="text-stone-300 hover:text-[#C5A059] transition-colors duration-300">현실 점검</button>
+            <button onClick={() => scrollToSection('philosophy')} className="text-stone-300 hover:text-[#C5A059] transition-colors duration-300">공간과 철학</button>
+            <button onClick={() => scrollToSection('walk')} className="text-stone-300 hover:text-[#C5A059] transition-colors duration-300">산책이 있는 삶</button>
+            <button onClick={() => scrollToSection('contact')} className="mt-10 px-16 py-6 bg-[#C5A059] text-white rounded-full text-2xl font-bold shadow-2xl hover:bg-[#8C7335] transition-all">상담 예약하기</button>
           </nav>
       </div>
     </>

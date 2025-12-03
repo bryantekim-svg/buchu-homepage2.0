@@ -72,18 +72,18 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                     <h1 className="text-xl font-bold">Admin Dashboard</h1>
                     <p className="text-xs text-stone-400">부추꽃더클래식 데이터 분석</p>
                 </div>
-                <button onClick={onLogout} className="flex items-center gap-2 text-sm hover:text-emerald-400">
+                <button onClick={onLogout} className="flex items-center gap-2 text-sm hover:text-[#C5A059]">
                     <X size={18} /> 나가기
                 </button>
             </header>
 
             <main className="max-w-7xl mx-auto p-8">
                 {/* Google Sync Notice */}
-                <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-lg mb-8 flex items-start gap-3">
-                    <FileSpreadsheet className="text-emerald-600 flex-shrink-0 mt-1" />
+                <div className="bg-[#C5A059]/10 border border-[#C5A059]/30 p-4 rounded-lg mb-8 flex items-start gap-3">
+                    <FileSpreadsheet className="text-[#8C7335] flex-shrink-0 mt-1" />
                     <div>
-                        <h3 className="font-bold text-emerald-800">구글 드라이브(스프레드시트) 연동 안내</h3>
-                        <p className="text-sm text-emerald-700 mt-1">
+                        <h3 className="font-bold text-[#8C7335]">구글 드라이브(스프레드시트) 연동 안내</h3>
+                        <p className="text-sm text-[#8C7335] mt-1">
                             현재 보안상의 이유로 정적 웹사이트에서는 구글 자동 연동이 제한됩니다.<br/>
                             대신 <strong>[데이터 엑셀 다운로드]</strong> 버튼을 눌러 파일을 받은 후, 구글 스프레드시트에 업로드하여 AI 분석을 진행하실 수 있습니다.
                         </p>
@@ -99,9 +99,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                         </div>
                         <p className="text-3xl font-bold">{stats.visits.toLocaleString()}<span className="text-sm font-normal text-gray-400 ml-2">명</span></p>
                     </div>
-                    <div className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-emerald-500">
+                    <div className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-[#C5A059]">
                         <div className="flex items-center gap-4 mb-2">
-                            <Phone className="text-emerald-500" />
+                            <Phone className="text-[#C5A059]" />
                             <span className="text-gray-500 text-sm font-bold">상담 신청 건수</span>
                         </div>
                         <p className="text-3xl font-bold">{stats.conversions}<span className="text-sm font-normal text-gray-400 ml-2">건</span></p>
@@ -128,7 +128,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                         <h2 className="text-lg font-bold">최근 상담 신청 내역</h2>
                         <button 
                             onClick={downloadCSV}
-                            className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded text-sm hover:bg-emerald-700 transition-colors"
+                            className="flex items-center gap-2 bg-[#8C7335] text-white px-4 py-2 rounded text-sm hover:bg-[#6B5628] transition-colors"
                         >
                             <Download size={16} />
                             데이터 엑셀 다운로드

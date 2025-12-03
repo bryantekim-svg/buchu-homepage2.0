@@ -50,8 +50,8 @@ const PhilosophyList: React.FC = () => {
                 {/* Gradient Overlay: Stronger on mobile for text readability */}
                 <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/70 to-transparent opacity-0 md:opacity-100 transition-opacity duration-1000 hidden md:block"></div>
                 
-                {/* Mobile Gradient: Bottom-up for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/90 to-transparent md:hidden"></div>
+                {/* Mobile Gradient: Bottom-up for text readability - Increased opacity for better contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/95 to-transparent md:hidden"></div>
             </div>
 
             {/* Scroll Trigger Spacer */}
@@ -60,26 +60,26 @@ const PhilosophyList: React.FC = () => {
             {/* Text Content Overlay */}
             <div className="relative z-20 flex flex-col justify-end md:justify-center min-h-[100dvh] px-6 md:px-24 pointer-events-none pb-20 md:pb-0">
                 <div className="max-w-4xl reveal pointer-events-auto bg-transparent md:bg-transparent p-0 rounded-none shadow-none">
-                    <span className="text-emerald-500 font-bold tracking-[0.2em] md:tracking-[0.4em] text-xs md:text-base mb-4 md:mb-8 block animate-pulse-slow uppercase">
+                    <span className="text-[#C5A059] font-bold tracking-[0.2em] md:tracking-[0.4em] text-sm md:text-base mb-4 md:mb-8 block animate-pulse-slow uppercase">
                         THE TRUTH about {item.tag.split(' ')[1]}
                     </span>
                     
-                    <h2 className="text-2xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-8 md:mb-12 leading-[1.3] whitespace-pre-line drop-shadow-2xl break-keep">
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-8 md:mb-12 leading-[1.3] whitespace-pre-line drop-shadow-2xl break-keep">
                         {item.title}
                     </h2>
                     
-                    <div className="w-16 md:w-24 h-1 md:h-1.5 bg-emerald-600 mb-8 md:mb-12 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.5)]"></div>
+                    <div className="w-20 md:w-24 h-1.5 md:h-1.5 bg-[#C5A059] mb-8 md:mb-12 rounded-full shadow-[0_0_20px_rgba(197,160,89,0.5)]"></div>
 
-                    {/* Problem Statement */}
+                    {/* Problem Statement - Larger Mobile Fonts */}
                     <div className="mb-8 md:mb-12 pl-4 md:pl-6 border-l-2 border-stone-600">
-                        <p className="text-sm md:text-xl text-stone-400 font-light leading-relaxed whitespace-pre-line break-keep">
+                        <p className="text-lg md:text-xl text-stone-300 font-light leading-relaxed whitespace-pre-line break-keep">
                             {item.problem}
                         </p>
                     </div>
 
-                    {/* Solution Statement */}
-                    <div className="bg-stone-900/80 backdrop-blur-xl border-l-4 border-emerald-500 p-6 md:p-12 rounded-r-2xl md:rounded-r-3xl shadow-2xl">
-                        <p className="text-base md:text-2xl text-stone-100 leading-relaxed md:leading-loose whitespace-pre-line font-medium break-keep">
+                    {/* Solution Statement - Highlighted */}
+                    <div className="bg-stone-900/80 backdrop-blur-xl border-l-4 border-[#C5A059] p-6 md:p-12 rounded-r-2xl md:rounded-r-3xl shadow-2xl">
+                        <p className="text-xl md:text-2xl text-stone-100 leading-relaxed md:leading-loose whitespace-pre-line font-medium break-keep">
                             {item.solution}
                         </p>
                     </div>

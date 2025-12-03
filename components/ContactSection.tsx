@@ -32,9 +32,9 @@ const ContactSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center mb-24 reveal">
-            <h2 className="text-emerald-500 font-bold tracking-[0.3em] uppercase text-sm mb-6">Reservation</h2>
+            <h2 className="text-[#C5A059] font-bold tracking-[0.3em] uppercase text-sm mb-6">Reservation</h2>
             <h3 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">입소 상담 및 대기 신청</h3>
-            <p className="text-stone-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-stone-400 max-w-2xl mx-auto leading-relaxed text-xl">
                 부모님을 모시는 일은 인생에서 가장 중요한 결정 중 하나입니다.<br/>
                 가벼운 마음으로 문의주셔도 좋습니다. 전문가가 진심을 다해 안내해 드립니다.
             </p>
@@ -43,35 +43,35 @@ const ContactSection: React.FC = () => {
         {/* Map & Info Card - Premium Dark Design */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-stone-900 rounded-3xl overflow-hidden shadow-2xl mb-24 border border-stone-800 reveal">
             <div className="lg:col-span-5 p-10 md:p-14 flex flex-col justify-center gap-10 bg-gradient-to-br from-stone-900 to-stone-950 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-900/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#C5A059]/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
                 
                 <div>
-                    <div className="flex items-center gap-4 mb-3 text-emerald-400">
+                    <div className="flex items-center gap-4 mb-3 text-[#C5A059]">
                         <MapPin className="w-6 h-6" />
                         <h4 className="font-bold text-lg tracking-widest uppercase">Location</h4>
                     </div>
                     <p className="text-xl text-white font-serif pl-10 leading-relaxed border-l-2 border-stone-800 ml-3">
                         경기도 김포시 김포한강7로22번길 123<br/>
-                        <span className="text-stone-500 text-sm font-sans mt-2 block">(마산동, 부추꽃더클래식너싱홈)</span>
+                        <span className="text-stone-500 text-lg font-sans mt-2 block">(마산동, 부추꽃더클래식너싱홈)</span>
                     </p>
                 </div>
                 <div>
-                    <div className="flex items-center gap-4 mb-3 text-emerald-400">
+                    <div className="flex items-center gap-4 mb-3 text-[#C5A059]">
                         <Phone className="w-6 h-6" />
                         <h4 className="font-bold text-lg tracking-widest uppercase">Contact</h4>
                     </div>
-                    <a href="tel:031-998-8369" className="text-3xl md:text-4xl text-white font-serif font-bold pl-10 block hover:text-emerald-400 transition-colors">
+                    <a href="tel:031-998-8369" className="text-3xl md:text-4xl text-white font-serif font-bold pl-10 block hover:text-[#C5A059] transition-colors">
                         031-998-8369
                     </a>
                 </div>
                 <div>
-                    <div className="flex items-center gap-4 mb-3 text-emerald-400">
+                    <div className="flex items-center gap-4 mb-3 text-[#C5A059]">
                         <Clock className="w-6 h-6" />
                         <h4 className="font-bold text-lg tracking-widest uppercase">Hours</h4>
                     </div>
-                    <div className="pl-10 text-stone-400">
-                        <p className="mb-1"><span className="text-white w-20 inline-block">평일</span> 09:00 - 18:00</p>
-                        <p><span className="text-white w-20 inline-block">주말/공휴일</span> 사전 예약제</p>
+                    <div className="pl-10 text-stone-400 text-lg">
+                        <p className="mb-1"><span className="text-white w-24 inline-block">평일</span> 09:00 - 18:00</p>
+                        <p><span className="text-white w-24 inline-block">주말/공휴일</span> 사전 예약제</p>
                     </div>
                 </div>
             </div>
@@ -93,21 +93,21 @@ const ContactSection: React.FC = () => {
 
         {/* VIP Application Form */}
         <div className="max-w-5xl mx-auto bg-white text-stone-900 rounded-3xl p-8 md:p-20 shadow-2xl reveal relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-stone-200 via-emerald-500 to-stone-200"></div>
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-stone-200 via-[#C5A059] to-stone-200"></div>
             
             <h2 className="text-3xl md:text-5xl font-serif font-bold text-center mb-4">VIP 입소 대기 신청서</h2>
-            <p className="text-center text-stone-500 mb-16 max-w-2xl mx-auto">
-                작성해주신 내용을 바탕으로 <span className="text-emerald-700 font-bold">맞춤형 케어 플랜</span>을 미리 설계합니다.<br/>
+            <p className="text-center text-stone-500 mb-16 max-w-2xl mx-auto text-lg">
+                작성해주신 내용을 바탕으로 <span className="text-[#8C7335] font-bold">맞춤형 케어 플랜</span>을 미리 설계합니다.<br/>
                 모든 정보는 상담 목적 외에는 절대 사용되지 않습니다.
             </p>
 
             {submitted ? (
                 <div className="text-center py-32 animate-fade-up">
-                    <CheckCircle2 className="w-24 h-24 text-emerald-500 mx-auto mb-8" />
+                    <CheckCircle2 className="w-24 h-24 text-[#C5A059] mx-auto mb-8" />
                     <h3 className="text-3xl font-bold text-stone-900 mb-4">신청이 완료되었습니다.</h3>
-                    <p className="text-stone-600 text-lg">
+                    <p className="text-stone-600 text-xl">
                         담당 사회복지사가 내용 확인 후,<br/>
-                        <span className="font-bold text-emerald-700">24시간 이내</span>에 우선적으로 연락드리겠습니다.
+                        <span className="font-bold text-[#8C7335]">24시간 이내</span>에 우선적으로 연락드리겠습니다.
                     </p>
                 </div>
             ) : (
@@ -146,12 +146,12 @@ const ContactSection: React.FC = () => {
                                 <SelectField label="인지 상태 (치매)" name="cognitionState" options={["정상", "경증(깜빡함)", "중증(배회/망상)", "말기"]} onChange={handleChange} />
                                 <SelectField label="공격성/폭력성" name="violenceState" options={["없음(온순함)", "가끔 화냄", "거부 심함", "폭력성 있음"]} onChange={handleChange} />
                                 <div className="md:col-span-2">
-                                    <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">특이사항 및 요청사항</label>
+                                    <label className="block text-sm font-bold text-stone-400 uppercase tracking-wider mb-2">특이사항 및 요청사항</label>
                                     <textarea 
                                         name="notes" 
                                         onChange={handleChange} 
                                         rows={4} 
-                                        className="w-full border-b border-stone-300 py-3 focus:border-emerald-600 focus:outline-none transition-colors bg-transparent resize-none text-lg" 
+                                        className="w-full border-b border-stone-300 py-4 focus:border-[#C5A059] focus:outline-none transition-colors bg-transparent resize-none text-xl" 
                                         placeholder="어르신이 좋아하시는 음식, 노래, 혹은 피해야 할 주제 등을 자유롭게 적어주세요." 
                                     />
                                 </div>
@@ -161,13 +161,13 @@ const ContactSection: React.FC = () => {
                         <div key={section.title} className="pb-8 border-b border-stone-100 last:border-0">
                             <h3 className="flex items-center gap-4 mb-8">
                                 <span className="text-5xl font-serif font-bold text-stone-100 select-none">{section.icon}</span>
-                                <span className="text-xl font-bold text-stone-800">{section.title}</span>
+                                <span className="text-2xl font-bold text-stone-800">{section.title}</span>
                             </h3>
                             {section.content}
                         </div>
                     ))}
 
-                    <button type="submit" className="w-full bg-stone-900 text-white font-bold py-6 rounded-xl text-xl hover:bg-emerald-900 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center justify-center gap-3">
+                    <button type="submit" className="w-full bg-stone-900 text-white font-bold py-6 rounded-xl text-xl hover:bg-[#8C7335] transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center justify-center gap-3">
                         <Send className="w-6 h-6" />
                         상담 신청서 제출하기
                     </button>
@@ -179,15 +179,15 @@ const ContactSection: React.FC = () => {
   );
 };
 
-// UI Helpers
+// UI Helpers - Larger Fonts for Accessibility
 const InputField = ({ label, name, ph, req, onChange }: any) => (
     <div>
-        <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">{label} {req && <span className="text-emerald-500">*</span>}</label>
+        <label className="block text-sm font-bold text-stone-400 uppercase tracking-wider mb-2">{label} {req && <span className="text-[#C5A059]">*</span>}</label>
         <input 
             required={req} 
             name={name} 
             onChange={onChange} 
-            className="w-full border-b border-stone-300 py-3 focus:border-emerald-600 focus:outline-none transition-colors bg-transparent text-lg placeholder-stone-300" 
+            className="w-full border-b border-stone-300 py-4 focus:border-[#C5A059] focus:outline-none transition-colors bg-transparent text-xl placeholder-stone-300" 
             placeholder={ph} 
         />
     </div>
@@ -195,9 +195,9 @@ const InputField = ({ label, name, ph, req, onChange }: any) => (
 
 const SelectField = ({ label, name, options, onChange }: any) => (
     <div>
-        <label className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">{label}</label>
+        <label className="block text-sm font-bold text-stone-400 uppercase tracking-wider mb-2">{label}</label>
         <div className="relative">
-            <select name={name} onChange={onChange} className="w-full border-b border-stone-300 py-3 focus:border-emerald-600 focus:outline-none transition-colors bg-transparent text-lg appearance-none cursor-pointer">
+            <select name={name} onChange={onChange} className="w-full border-b border-stone-300 py-4 focus:border-[#C5A059] focus:outline-none transition-colors bg-transparent text-xl appearance-none cursor-pointer">
                 {options.map((opt: string) => <option key={opt} value={opt}>{opt}</option>)}
             </select>
             <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-stone-400">▼</div>

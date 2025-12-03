@@ -33,7 +33,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-black text-white selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen flex flex-col font-sans bg-black text-white selection:bg-[#C5A059] selection:text-white">
       <Header />
       
       <main className="flex-grow">

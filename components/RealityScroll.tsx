@@ -35,16 +35,16 @@ const RealityScroll: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-32 reveal">
-            <span className="text-emerald-600 font-bold tracking-[0.3em] uppercase text-sm mb-6 block">The Problem</span>
+            <span className="text-[#C5A059] font-bold tracking-[0.3em] uppercase text-sm mb-6 block">The Problem</span>
             <h2 className="text-4xl md:text-6xl font-serif font-bold text-stone-900 mb-10 leading-tight">
                 가장 큰 걱정은 결국<br/>
                 <span className="relative inline-block px-4">
                     '적응'
-                    <span className="absolute bottom-2 left-0 w-full h-4 bg-emerald-200/50 -z-10 skew-x-12"></span>
+                    <span className="absolute bottom-2 left-0 w-full h-4 bg-[#C5A059]/30 -z-10 skew-x-12"></span>
                 </span>
                 의 문제입니다.
             </h2>
-            <p className="text-stone-600 text-xl md:text-2xl max-w-3xl mx-auto break-keep leading-relaxed font-light">
+            <p className="text-stone-600 text-xl md:text-3xl max-w-3xl mx-auto break-keep leading-loose font-light">
                 시설이 아무리 화려해도, 마음이 불편하면 지옥과 같습니다.<br/>
                 <span className="font-bold text-stone-900">우리 부모님이 겪으실 세 가지 두려움</span>, 우리는 이것부터 해결해야 했습니다.
             </p>
@@ -65,19 +65,19 @@ const RealityScroll: React.FC = () => {
                  
                  <div className="relative z-10 text-center px-6 transform group-hover:scale-105 transition-transform duration-500">
                     <h3 className="text-3xl font-serif font-bold text-white mb-3">{item.title}</h3>
-                    <div className="w-16 h-1 bg-emerald-500 mx-auto opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"></div>
+                    <div className="w-16 h-1 bg-[#C5A059] mx-auto opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"></div>
                  </div>
               </div>
               
               <div className="p-10 flex-grow flex flex-col relative bg-white">
-                <h4 className="text-lg font-bold text-stone-800 mb-6 pb-4 border-b border-stone-100">
+                <h4 className="text-xl font-bold text-stone-800 mb-6 pb-4 border-b border-stone-100">
                     {item.subtitle}
                 </h4>
-                <p className="text-stone-600 text-base leading-7 whitespace-pre-line break-keep flex-grow">
+                <p className="text-stone-600 text-lg leading-relaxed whitespace-pre-line break-keep flex-grow">
                   {item.desc}
                 </p>
                 
-                <div className="absolute bottom-0 left-0 w-full h-1.5 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left"></div>
+                <div className="absolute bottom-0 left-0 w-full h-2 bg-[#C5A059] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left"></div>
               </div>
             </div>
           ))}

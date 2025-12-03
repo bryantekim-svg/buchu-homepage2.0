@@ -29,7 +29,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onCancel }) => {
         className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 w-full max-w-md border border-stone-200 relative overflow-hidden"
         onClick={(e) => e.stopPropagation()} 
       >
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-stone-800 via-emerald-600 to-stone-800"></div>
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-stone-800 via-[#C5A059] to-stone-800"></div>
 
         <div className="flex justify-center mb-8">
           <div className="p-4 bg-stone-100 rounded-full shadow-inner">
@@ -47,7 +47,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onCancel }) => {
               type="text" 
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 focus:ring-2 focus:ring-emerald-600 outline-none transition-all font-sans text-lg"
+              className="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 focus:ring-2 focus:ring-[#C5A059] outline-none transition-all font-sans text-lg"
               placeholder="아이디"
               autoFocus
             />
@@ -58,7 +58,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onCancel }) => {
               type="password" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 focus:ring-2 focus:ring-emerald-600 outline-none transition-all font-sans text-lg"
+              className="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 focus:ring-2 focus:ring-[#C5A059] outline-none transition-all font-sans text-lg"
               placeholder="비밀번호"
             />
           </div>
@@ -79,7 +79,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onCancel }) => {
             </button>
             <button 
               type="submit" 
-              className="flex-1 py-4 bg-stone-900 text-white rounded-lg hover:bg-emerald-900 transition-all shadow-lg font-bold text-sm"
+              className="flex-1 py-4 bg-stone-900 text-white rounded-lg hover:bg-[#8C7335] transition-all shadow-lg font-bold text-sm"
             >
               로그인
             </button>
