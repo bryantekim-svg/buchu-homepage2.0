@@ -1,86 +1,30 @@
 import React from 'react';
 
-interface FooterProps {
-    onAdminClick?: () => void;
-}
+interface FooterProps { onAdminClick?: () => void; }
 
 const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
   return (
-    <footer className="bg-stone-950 text-stone-400 py-24 border-t border-stone-900 reveal relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#C5A059]/10 rounded-full blur-[100px] pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-20 mb-24">
-            
-            {/* Brand Section */}
-            <div className="flex flex-col items-start max-w-lg">
-                {/* Logo Size Significantly Increased (4x) */}
-                <img 
-                    src="./logo.png" 
-                    alt="부추꽃더클래식" 
-                    className="h-32 md:h-48 w-auto mb-12 brightness-0 invert opacity-90 object-contain"
-                    onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                    }}
-                />
-                <span className="hidden text-white font-serif font-bold text-5xl tracking-tighter mb-8">
-                    부추꽃 더 클래식
-                </span>
-                
-                <p className="font-serif text-stone-500 text-2xl leading-relaxed mb-10 break-keep">
-                    도심의 편리함과 자연의 휴식이 공존하는 곳.<br/>
-                    접근성 좋은 김포 한강신도시에서 누리는<br/>
-                    <span className="text-stone-300 font-bold">대한민국 상위 1%를 위한 프리미엄 요양원</span>입니다.
+    <footer className="bg-stone-100 text-stone-600 py-20">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col lg:flex-row justify-between gap-12 mb-16">
+            <div>
+                <img src="./logo.png" alt="Logo" className="h-24 mb-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                <h3 className="text-3xl font-serif font-bold text-stone-900 mb-6">부추꽃더클래식</h3>
+                <p className="text-lg leading-relaxed">
+                    도심의 편리함과 자연의 휴식이 공존하는<br/>
+                    대한민국 상위 1% 프리미엄 요양원
                 </p>
             </div>
-
-            {/* Info Section - Grid Layout - Larger Fonts */}
-            <div className="w-full lg:w-auto flex-1 max-w-2xl">
-                <h4 className="text-white font-bold tracking-[0.2em] uppercase mb-10 text-sm flex items-center gap-4">
-                    <span className="w-8 h-px bg-[#C5A059]"></span>
-                    Premium Senior Care Information
-                </h4>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 text-base font-light tracking-wide">
-                    <div className="space-y-2">
-                        <span className="block text-[#C5A059]/80 text-xs uppercase font-bold tracking-widest">Representative</span>
-                        <p className="text-stone-200 text-xl font-medium">김선규 외 3명</p>
-                    </div>
-                    <div className="space-y-2">
-                        <span className="block text-[#C5A059]/80 text-xs uppercase font-bold tracking-widest">Registration No.</span>
-                        <p className="text-stone-300 text-lg">126-80-30623</p>
-                    </div>
-                    <div className="md:col-span-2 space-y-2 border-t border-stone-900 pt-6">
-                        <span className="block text-[#C5A059]/80 text-xs uppercase font-bold tracking-widest">Address</span>
-                        <p className="text-stone-300 text-xl">경기도 김포시 김포한강7로22번길 123 <br/><span className="text-stone-500 text-lg">(마산동, 부추꽃더클래식너싱홈)</span></p>
-                    </div>
-                     <div className="md:col-span-2 space-y-2 border-t border-stone-900 pt-6">
-                        <span className="block text-[#C5A059]/80 text-xs uppercase font-bold tracking-widest">Concierge Center</span>
-                        <a href="tel:031-998-8369" className="text-4xl md:text-5xl text-[#C5A059] font-serif font-bold hover:text-white transition-colors inline-block mt-2">
-                            031-998-8369
-                        </a>
-                        <p className="text-stone-600 text-sm mt-2">365일 24시간 입소 상담 가능</p>
-                    </div>
-                </div>
+            <div className="space-y-4 text-lg">
+                <p><strong className="text-stone-900">대표</strong> 김선규 외 3명</p>
+                <p><strong className="text-stone-900">주소</strong> 경기도 김포시 김포한강7로22번길 123 (마산동)</p>
+                <p><strong className="text-stone-900">전화</strong> 031-998-8369</p>
+                <p><strong className="text-stone-900">사업자번호</strong> 126-80-30623</p>
             </div>
         </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-stone-900 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-stone-600 font-medium tracking-wide">
-            <p>&copy; {new Date().getFullYear()} Buchukkot The Classic. All rights reserved.</p>
-            
-            <div className="flex items-center gap-8">
-                 <a href="#" className="hover:text-white transition-colors">이용약관</a>
-                 <a href="#" className="hover:text-white transition-colors font-bold text-stone-400">개인정보처리방침</a>
-                 <button 
-                    onClick={onAdminClick}
-                    className="flex items-center gap-2 hover:text-[#C5A059] transition-colors uppercase tracking-widest opacity-50 hover:opacity-100"
-                >
-                    Admin Access
-                </button>
-            </div>
+        <div className="border-t border-stone-200 pt-8 flex justify-between items-center">
+            <p>&copy; 2024 Buchukkot. All rights reserved.</p>
+            <button onClick={onAdminClick} className="text-sm font-bold text-stone-400 hover:text-[#C5A059]">Admin</button>
         </div>
       </div>
     </footer>

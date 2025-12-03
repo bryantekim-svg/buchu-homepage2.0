@@ -14,7 +14,6 @@ const App: React.FC = () => {
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // 시뮬레이션: 방문자 수 카운트 (로컬 스토리지 활용)
   useEffect(() => {
     const visits = parseInt(localStorage.getItem('admin_visits') || '0');
     localStorage.setItem('admin_visits', (visits + 1).toString());
@@ -33,19 +32,17 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-black text-white selection:bg-[#C5A059] selection:text-white">
+    // 배경색을 밝은 색(#fdfbf7)으로 확실하게 지정
+    <div className="min-h-screen flex flex-col font-sans bg-[#fdfbf7] text-stone-800">
       <Header />
-      
       <main className="flex-grow">
         <Hero />
-        {/* 공감 스토리: 문제 인식 -> 해결책 제시의 가교 역할 */}
         <EmpathyStory />
         <RealityScroll />
         <PhilosophyList />
         <ClimaxWalk />
         <ContactSection />
       </main>
-
       <Footer onAdminClick={() => setIsAdminMode(true)} />
     </div>
   );

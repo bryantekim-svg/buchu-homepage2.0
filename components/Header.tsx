@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
@@ -15,50 +24,51 @@ const Header: React.FC = () => {
   return (
     <>
       <header 
-        className="fixed top-0 left-0 right-0 z-50 py-8 transition-all duration-700 mix-blend-difference text-white pointer-events-none"
+        className={`fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-500 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-6'}`}
       >
-        <div className="w-full max-w-[1920px] mx-auto px-6 md:px-16 flex justify-between items-center h-20 md:h-28 pointer-events-auto">
+        <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 flex justify-between items-center h-20">
           
-          {/* Logo */}
+          {/* Logo - 밝은 배경에 맞게 색상 필터 조정 */}
           <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="block relative group">
             <img 
               src="./logo.png" 
               alt="부추꽃더클래식" 
-              className="object-contain h-24 md:h-32 brightness-0 invert"
+              className="object-contain h-24 md:h-32 transition-all duration-500"
+              style={{ filter: 'none' }} // 로고가 원래 금색/갈색이라면 필터 제거, 흰색이면 invert 필요. 여기선 원본이 금색이라 가정하고 원본 사용
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 e.currentTarget.nextElementSibling?.classList.remove('hidden');
               }}
             />
-            <span className="hidden font-serif text-3xl md:text-5xl font-bold tracking-tighter whitespace-nowrap">
+            {/* 텍스트 로고 백업 (이미지 깨질 시) */}
+            <span className="hidden font-serif text-3xl md:text-4xl font-bold tracking-tighter text-[#8C7335] whitespace-nowrap">
               부추꽃더클래식
             </span>
           </a>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-16">
+          {/* Desktop Nav - Dark Text for Light Theme */}
+          <nav className="hidden md:flex items-center gap-12">
             {['REALITY', 'PHILOSOPHY', 'LIFESTYLE'].map((item) => (
                 <button 
                     key={item}
                     onClick={() => scrollToSection(item.toLowerCase() === 'lifestyle' ? 'walk' : item.toLowerCase())} 
-                    className="text-xs font-bold hover:opacity-70 uppercase tracking-[0.25em] transition-all hover:-translate-y-1 relative group py-2"
+                    className="text-sm font-bold text-stone-600 hover:text-[#C5A059] uppercase tracking-[0.15em] transition-colors py-2"
                 >
                     {item}
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
                 </button>
             ))}
             
             <button 
               onClick={() => scrollToSection('contact')}
-              className="px-10 py-4 border border-white rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-500 transform hover:scale-105"
+              className="px-8 py-3 border border-[#C5A059] rounded-full text-xs font-bold text-[#8C7335] uppercase tracking-widest hover:bg-[#C5A059] hover:text-white transition-all duration-300"
             >
-              Consultation
+              상담 예약하기
             </button>
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Dark Color */}
           <button 
-            className="md:hidden z-50 p-2 hover:opacity-70 transition-opacity"
+            className="md:hidden z-50 p-2 text-stone-800"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
@@ -66,17 +76,17 @@ const Header: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile Nav Overlay - Gold Theme & Larger Fonts */}
-      <div className={`fixed inset-0 z-[60] bg-stone-950 flex flex-col items-center justify-center transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-          <button className="absolute top-8 right-8 text-white p-4" onClick={() => setMobileMenuOpen(false)}>
-            <X size={32} />
+      {/* Mobile Nav Overlay - Bright & Large Fonts */}
+      <div className={`fixed inset-0 z-[60] bg-[#fdfbf7] flex flex-col items-center justify-center transition-all duration-500 ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+          <button className="absolute top-6 right-6 text-stone-800 p-4" onClick={() => setMobileMenuOpen(false)}>
+            <X size={36} />
           </button>
-          <div className="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
-          <nav className="flex flex-col gap-12 text-4xl font-serif items-center relative z-10 text-white">
-            <button onClick={() => scrollToSection('reality')} className="text-stone-300 hover:text-[#C5A059] transition-colors duration-300">현실 점검</button>
-            <button onClick={() => scrollToSection('philosophy')} className="text-stone-300 hover:text-[#C5A059] transition-colors duration-300">공간과 철학</button>
-            <button onClick={() => scrollToSection('walk')} className="text-stone-300 hover:text-[#C5A059] transition-colors duration-300">산책이 있는 삶</button>
-            <button onClick={() => scrollToSection('contact')} className="mt-10 px-16 py-6 bg-[#C5A059] text-white rounded-full text-2xl font-bold shadow-2xl hover:bg-[#8C7335] transition-all">상담 예약하기</button>
+          
+          <nav className="flex flex-col gap-10 text-center">
+            <button onClick={() => scrollToSection('reality')} className="text-3xl font-serif text-stone-800 hover:text-[#C5A059] font-medium">현실 점검</button>
+            <button onClick={() => scrollToSection('philosophy')} className="text-3xl font-serif text-stone-800 hover:text-[#C5A059] font-medium">공간과 철학</button>
+            <button onClick={() => scrollToSection('walk')} className="text-3xl font-serif text-stone-800 hover:text-[#C5A059] font-medium">산책이 있는 삶</button>
+            <button onClick={() => scrollToSection('contact')} className="mt-8 px-12 py-5 bg-[#C5A059] text-white rounded-full text-xl font-bold shadow-lg">상담 예약하기</button>
           </nav>
       </div>
     </>
